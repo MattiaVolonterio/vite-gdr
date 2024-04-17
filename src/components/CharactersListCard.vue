@@ -13,8 +13,11 @@ export default {
     <div class="card h-100">
       <div class="card-body">
         <h5 class="card-title">
-          <strong>{{ character.name }}</strong>
+          <strong class="h5">{{ character.name }}</strong>
         </h5>
+        <p class="card-title">
+          <strong>{{ character.type.name }}</strong>
+        </p>
         <p class="card-text">
           {{ character.description }}
         </p>
