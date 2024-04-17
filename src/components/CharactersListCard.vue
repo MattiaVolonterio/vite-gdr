@@ -40,7 +40,11 @@ export default {
         </li>
       </ul>
       <div class="card-body">
-        <div class="btn btn-primary">Seleziona</div>
+        <router-link
+          :to="{ name: 'confirm.character', params: { id: character.id } }"
+          class="btn btn-primary"
+          >Seleziona</router-link
+        >
       </div>
     </div>
   </div>
