@@ -25,7 +25,7 @@ export default {
 </script>
 
 <template>
-  <div v-if="character" class="mt-5">
+  <div v-if="character" class="my-5">
     <h1>
       Conferma la tua selezione di <strong>{{ character.name }}</strong>
     </h1>
@@ -41,6 +41,9 @@ export default {
       <div class="col-6">
         <div class="fs-4">
           <strong class="me-3">Classe:</strong>{{ character.type.name }}
+        </div>
+        <div class="fs-4 mt-3">
+          <strong class="me-3">Descrizione:</strong>{{ character.description }}
         </div>
         <div class="fs-4 mt-3">
           <strong class="me-3">Statistiche:</strong>
