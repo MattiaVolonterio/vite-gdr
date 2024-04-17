@@ -5,5 +5,6 @@ export const api = {
 };
 
 export const store = reactive({
-  // reactive data
+  characters: [],
+  charactersLink: [],
 });

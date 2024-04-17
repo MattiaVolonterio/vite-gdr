@@ -1,19 +1,25 @@
 <script>
+import PaginationComp from "./ui/PaginationComp.vue";
+import CharactersListCard from "./CharactersListCard.vue";
 import axios from "axios";
-import { api } from "../store";
+import { store, api } from "../store";
 
 export default {
   data() {
     return {
-      title: "Character List",
-      characters: [],
+      store,
+      title: "Seleziona il tuo personaggio",
     };
   },
   props: {},
+
+  components: { PaginationComp, CharactersListCard },
+
   methods: {
-    fetchCharacters() {
-      axios.get(api.baseUrl + "characters").then((response) => {
-        this.characters = response.data.data;
+    fetchCharacters(endpoint = api.baseUrl + "characters") {
+      axios.get(endpoint).then((response) => {
+        store.characters = response.data.data;
+        store.charactersLink = response.data.links;
       });
     },
   },
@@ -24,16 +30,19 @@ export default {
 };
 </script>
 <template>
-  <div class="container mt-5">
-    <h1>{{ title }}</h1>
+  <h1 class="mt-5">{{ title }}</h1>
 
-    <div v-for="character in characters">
-      <ul>
-        <li><strong>ID: </strong>{{ character.id }}</li>
-        <li><strong>Title: </strong>{{ character.title }}</li>
-        <li><strong>Stats: </strong>{{ character.stats }}</li>
-      </ul>
-    </div>
+  <div class="row row-cols-4 g-3 mt-3">
+    <characters-list-card
+      v-for="character in store.characters"
+      :character="character"
+    />
   </div>
+
+  <pagination-comp
+    :links="store.charactersLink"
+    @change-page="fetchCharacters"
+    class="mt-4"
+  />
 </template>
 <style lang="scss" scoped></style>

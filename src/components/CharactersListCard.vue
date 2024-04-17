@@ -1,0 +1,46 @@
+<script>
+export default {
+  data() {
+    return {};
+  },
+  props: { character: Object },
+  methods: {},
+};
+</script>
+
+<template>
+  <div class="col">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">
+          <strong>{{ character.name }}</strong>
+        </h5>
+        <p class="card-text">
+          {{ character.description }}
+        </p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <strong>Forza: </strong>{{ character.strength }}
+        </li>
+        <li class="list-group-item">
+          <strong>Difesa: </strong>{{ character.defence }}
+        </li>
+        <li class="list-group-item">
+          <strong>Velocità: </strong>{{ character.speed }}
+        </li>
+        <li class="list-group-item">
+          <strong>Intelligenza: </strong>{{ character.intelligence }}
+        </li>
+        <li class="list-group-item">
+          <strong>Vita: </strong>{{ character.life }}
+        </li>
+      </ul>
+      <div class="card-body">
+        <div class="btn btn-primary">Seleziona</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style lang="scss" scoped></style>

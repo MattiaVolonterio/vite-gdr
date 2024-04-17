@@ -29,11 +29,8 @@ export default {
               :to="{ name: 'home' }"
               class="nav-link active"
               aria-current="page"
-              >Home</router-link
+              >Gioca</router-link
             >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Personaggi</a>
           </li>
         </ul>
       </div>
