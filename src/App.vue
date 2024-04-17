@@ -1,37 +1,38 @@
 <script>
-import axios from 'axios';
-import { api } from './store';
+import AppHeader from "./components/AppHeader.vue";
+import AppMain from "./components/AppMain.vue";
+import AppFooter from "./components/AppFooter.vue";
 
 export default {
   data() {
-    return {
-      title: 'Character List',
-      characters: [],
-    };
+    return {};
   },
   props: {},
-  methods: {
-    created() {
-      axios.get(api.baseUrl + 'character').then((response)) => {
-        this.characters = response.data.data;
-      }
-
-    }
-  },
+  methods: {},
+  components: { AppHeader, AppMain, AppFooter },
 };
 </script>
+
 <template>
-  <div class="container mt-5">
-    <h1>{{ title }}</h1>
-
-    <div v-for="character in characters">
-      <ul>
-        <li><strong>ID: </strong>{{ character.id }}</li>
-        <li><strong>Title: </strong>{{ character.title }}</li>
-        <li><strong>Stats: </strong>{{ character.stats }}</li>
-      </ul>
-
+  <div class="page-container">
+    <app-header />
+    <div class="container main-container">
+      <app-main />
     </div>
+    <app-footer />
   </div>
 </template>
-<style lang="scss" scoped></style>
+
+<style lang="scss">
+@use "/src/scss/general.scss";
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  .main-container {
+    flex-grow: 1;
+  }
+}
+</style>
