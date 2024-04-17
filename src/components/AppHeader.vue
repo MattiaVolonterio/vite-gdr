@@ -25,7 +25,12 @@ export default {
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <router-link
+              :to="{ name: 'home' }"
+              class="nav-link active"
+              aria-current="page"
+              >Home</router-link
+            >
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Personaggi</a>

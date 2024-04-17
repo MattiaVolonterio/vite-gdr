@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import HomePage from "./pages/HomePage.vue";
+import CharactersList from "./components/CharactersList.vue";
+import AppMain from "./components/AppMain.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -8,7 +9,13 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: HomePage,
+      component: AppMain,
+    },
+
+    {
+      path: "/character-selection",
+      name: "characters.index",
+      component: CharactersList,
     },
   ],
 });

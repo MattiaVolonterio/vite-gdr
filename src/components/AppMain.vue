@@ -17,7 +17,11 @@ export default {
         class="splash-img"
       />
 
-      <div class="btn btn-primary play-button">Gioca</div>
+      <router-link
+        :to="{ name: 'characters.index' }"
+        class="btn btn-primary play-button"
+        >Gioca</router-link
+      >
     </div>
   </div>
 </template>

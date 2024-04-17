@@ -17,7 +17,7 @@ export default {
   <div class="page-container">
     <app-header />
     <div class="container main-container">
-      <app-main />
+      <router-view />
     </div>
     <app-footer />
   </div>
