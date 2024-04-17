@@ -1,10 +1,10 @@
-import { reactive }  from 'vue';
+import { reactive } from 'vue';
+
+export const api = {
+    baseUrl: 'to add'
+}
 
 export const store = reactive({
-     
-    api:{
-        baseUrl:'to add ',
-    },
-    
 
+    // reactive data
 });
