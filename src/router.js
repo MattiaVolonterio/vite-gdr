@@ -6,7 +6,13 @@ import ProjectDetail from "./pages/ProjectDetail.vue";
 
 const router = createRouter({
   history: createWebHistory(),
-  routes: [],
+  routes: [
+    {
+      path:'/',
+      name:'home',
+      component: HomePage
+  },
+  ],
 });
 
 export { router };
