@@ -39,10 +39,16 @@ export default {
     />
   </div>
 
-  <pagination-comp
-    :links="store.charactersLink"
-    @change-page="fetchCharacters"
-    class="mt-4"
-  />
+  <div class="d-flex justify-content-between align-items-center">
+    <pagination-comp
+      :links="store.charactersLink"
+      @change-page="fetchCharacters"
+      class="mt-4"
+    />
+
+    <router-link :to="{ name: 'home' }" class="btn btn-warning h-50 mt-4"
+      >Torna alla pagina iniziale</router-link
+    >
+  </div>
 </template>
 <style lang="scss" scoped></style>
