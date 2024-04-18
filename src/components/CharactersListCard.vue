@@ -19,11 +19,11 @@ export default {
         <p class="card-title">
           <strong>{{ character.type.name }}</strong>
         </p>
-        <p class="card-text">
+        <!-- <p class="card-text">
           {{ character.description }}
-        </p>
+        </p> -->
       </div>
-      <ul class="list-group list-group-flush">
+      <!-- <ul class="list-group list-group-flush">
         <li class="list-group-item">
           <strong>Forza: </strong>{{ character.strength }}
         </li>
@@ -39,7 +39,7 @@ export default {
         <li class="list-group-item">
           <strong>Vita: </strong>{{ character.life }}
         </li>
-      </ul>
+      </ul> -->
       <div class="card-body">
         <router-link
           :to="{ name: 'confirm.character', params: { id: character.id } }"

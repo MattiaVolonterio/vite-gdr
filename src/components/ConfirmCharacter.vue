@@ -34,7 +34,7 @@ export default {
         <img
           :src="character.type.image"
           :alt="character.name"
-          class="character-image"
+          class="character-image w-75"
         />
       </div>
       <div class="col-6">
