@@ -102,9 +102,12 @@ export default {
             class="btn btn-warning me-3"
             >Torna alla selezione</router-link
           >
-          <router-link v-if="selectedWeapon != null" class="btn btn-success"
-            >Conferma</router-link
-          >
+         
+          <router-link v-if="selectedWeapon != null" 
+             :to="{ name: 'characters.show', params: { id: character.id, weaponId: selectedWeapon } }"
+             class="btn btn-success ms-3">
+             Salva
+          </router-link>
         </div>
       </div>
     </div>

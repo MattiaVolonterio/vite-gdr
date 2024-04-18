@@ -1,4 +1,5 @@
 <script>
+import { store ,api } from "../store";
 export default {
   data() {
     return {};
@@ -45,6 +46,7 @@ export default {
           class="btn btn-primary"
           >Seleziona</router-link
         >
+        <router-link :to="{ name: 'characters.show', params: { id: character.id } }" class="btn btn-primary ms-3">show</router-link>
       </div>
     </div>
   </div>
