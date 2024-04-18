@@ -21,7 +21,7 @@ export default {
       total_cpu_damege: 0,
 
       /* fine gioco */
-      game_over: true,
+      game_over: false,
       cpu_win: false,
       player_win: false,
     };
