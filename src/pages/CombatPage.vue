@@ -13,6 +13,9 @@ export default {
 
       playerHealth: null,
       cpuHealth: null,
+
+      total_player_damege: 0,
+      total_cpu_damege: 0,
     };
   },
   computed: {
@@ -28,7 +31,6 @@ export default {
     },
     randomCPUWeapon() {
       if (this.randomCharacter && this.randomCharacter.items.length > 0) {
-        console.log(5);
         return this.randomCharacter.items[Math.floor(Math.random() * this.randomCharacter.items.length)];
       }
       return null;
@@ -60,31 +62,63 @@ export default {
     }
     },
 
+
+
+
+
+
+
+
+
+
+
     //metodi per att
     playerAttack() {
     if (this.randomCPUWeapon && this.randomCharacter) {
-      this.cpuHealth -= this.selectedWeapon.dice_faces;  
+     
+      if(this.selectedWeapon.dice_num){
+        let player_damege =this.character.strength + (parseInt(this.selectedWeapon.dice_num) * Math.floor(Math.random() * parseInt(this.selectedWeapon.dice_faces) + 1) )
+         this.total_player_damege = player_damege - this.randomCharacter.defence ;
+      }else{
+        this.total_player_damege = this.selectedWeapon.damege + this.character.strength - this.randomCharacter.defence ;
+      } 
+      this.cpuHealth -= this.total_player_damege;
+
+      
       if (this.cpuHealth <= 0) {
+        
         alert("Hai vinto!");
         return;
       }
+
 
       setTimeout(() => {
         this.cpuAttack();
       }, 1000); // Dopo 1 secondo, il CPU attacca
       }
     },
+
+
     cpuAttack() {
       if (this.randomCPUWeapon && this.character) {
-        this.playerHealth -= this.randomCPUWeapon.dice_faces;
         if (this.playerHealth <= 0) {
           alert("Hai perso!");
         }
+
+        if(this.randomCPUWeapon.dice_num){
+          let cpu_damege =this.randomCharacter.strength + (parseInt(this.randomCPUWeapon.dice_num) * Math.floor(Math.random() * parseInt(this.randomCPUWeapon.dice_faces) + 1) )
+          this.total_cpu_damege = cpu_damege - this.character.defence ;
+        }else{
+          this.total_cpu_damege = this.srandomCPUWeapon.damege + this.randomCharacter.strength - this.character.defence ;
+        } 
+          this.playerHealth -= this.total_cpu_damege;
+
       }
     }
 
-
   },
+
+
   created() {
     this.fetchCharacter();
   },
@@ -190,6 +224,10 @@ export default {
       </div>   
     </div>
   </div>
+
+  
+
+
   <div v-else class="d-flex justify-content-center align-items-center" style="height: 80vh;">
     <h2>Loading...</h2>
   </div>
