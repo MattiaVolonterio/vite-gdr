@@ -21,9 +21,15 @@ export default {
       total_cpu_damege: 0,
 
       /* fine gioco */
-      game_over: true,
+      game_over: false,
       cpu_win: false,
       player_win: false,
+
+      /* dice */
+
+      dice_cpu: '',
+      dice_player: '',
+
     };
   },
   computed: {
@@ -81,12 +87,9 @@ export default {
     playerAttack() {
       if (this.randomCPUWeapon && this.randomCharacter) {
         if (this.selectedWeapon.dice_num) {
+          this.dice_player = Math.floor(Math.random() * parseInt(this.selectedWeapon.dice_faces) + 1);
           let player_damege =
-            this.character.strength +
-            parseInt(this.selectedWeapon.dice_num) *
-              Math.floor(
-                Math.random() * parseInt(this.selectedWeapon.dice_faces) + 1
-              );
+            this.character.strength + this.dice_player;
           this.total_player_damege =
             player_damege - this.randomCharacter.defence;
         } else {
@@ -113,12 +116,10 @@ export default {
     cpuAttack() {
       if (this.randomCPUWeapon && this.character) {
         if (this.randomCPUWeapon.dice_num) {
-          let cpu_damege =
-            this.randomCharacter.strength +
-            parseInt(this.randomCPUWeapon.dice_num) *
-              Math.floor(
-                Math.random() * parseInt(this.randomCPUWeapon.dice_faces) + 1
-              );
+          this.dice_cpu = Math.floor(Math.random() * parseInt(this.randomCPUWeapon.dice_faces) + 1);
+      
+          let cpu_damege = this.randomCharacter.strength + this.dice_cpu;
+          
           this.total_cpu_damege = cpu_damege - this.character.defence;
         } else {
           this.total_cpu_damege =
@@ -206,7 +207,13 @@ export default {
         </div>
       </div>
 
-      <!-- VS -->
+
+
+
+
+
+
+      <!--           VSVSVSVSVSVSVSVSVSVSVSVSVSVSVSVSVSVSVSVSVS                                -->
 
       <div class="col-2 d-flex align-items-center">
         <div class="center-area">
@@ -219,11 +226,22 @@ export default {
             <button class="btn btn-warning ms-3" @click="playerAttack">
               Attacca
             </button>
-            <div>HP: {{ playerHealth }}</div>
-            <div>HP: {{ cpuHealth }}</div>
+            <div class="d-flex justify-content-center align-items-center gap-3">
+              <div class="dice border-success">{{dice_player}}</div>
+              <div class="dice border-danger">{{dice_cpu}}</div>
+            </div>
           </div>
         </div>
       </div>
+
+
+
+
+
+
+
+
+
 
       <!-- Card Cpu -->
       <div class="col-5">
@@ -295,12 +313,22 @@ export default {
   display: flex;
   justify-content: space-between;
   .center-area {
-    width: 15%;
+    width: 65%;
     font-size: 5rem;
+    .dice{
+      border: 2px solid;
+      border-radius: 20px;
+      min-width: 100px;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;box-shadow: 1px 2px 13px 0px #9a4d4d;
+    }
   }
   .card {
     width: 440px;
     height: 666px;
+    box-shadow: 1px 2px 13px 0px #FFFFFF;
   }
   img {
     height: 150px;
@@ -326,7 +354,10 @@ export default {
       height: 320px;
       width: 580px;
       background-color: rgba(51, 85, 45, 0.75);
+      
     }
+    
   }
+  
 }
 </style>
