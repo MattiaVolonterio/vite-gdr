@@ -21,15 +21,14 @@ export default {
       total_cpu_damege: 0,
 
       /* fine gioco */
-      game_over: false,
+      game_over: true,
       cpu_win: false,
       player_win: false,
 
       /* dice */
 
-      dice_cpu: '',
-      dice_player: '',
-
+      dice_cpu: "",
+      dice_player: "",
     };
   },
   computed: {
@@ -87,9 +86,10 @@ export default {
     playerAttack() {
       if (this.randomCPUWeapon && this.randomCharacter) {
         if (this.selectedWeapon.dice_num) {
-          this.dice_player = Math.floor(Math.random() * parseInt(this.selectedWeapon.dice_faces) + 1);
-          let player_damege =
-            this.character.strength + this.dice_player;
+          this.dice_player = Math.floor(
+            Math.random() * parseInt(this.selectedWeapon.dice_faces) + 1
+          );
+          let player_damege = this.character.strength + this.dice_player;
           this.total_player_damege =
             player_damege - this.randomCharacter.defence;
         } else {
@@ -116,10 +116,12 @@ export default {
     cpuAttack() {
       if (this.randomCPUWeapon && this.character) {
         if (this.randomCPUWeapon.dice_num) {
-          this.dice_cpu = Math.floor(Math.random() * parseInt(this.randomCPUWeapon.dice_faces) + 1);
-      
+          this.dice_cpu = Math.floor(
+            Math.random() * parseInt(this.randomCPUWeapon.dice_faces) + 1
+          );
+
           let cpu_damege = this.randomCharacter.strength + this.dice_cpu;
-          
+
           this.total_cpu_damege = cpu_damege - this.character.defence;
         } else {
           this.total_cpu_damege =
@@ -207,12 +209,6 @@ export default {
         </div>
       </div>
 
-
-
-
-
-
-
       <!--           VSVSVSVSVSVSVSVSVSVSVSVSVSVSVSVSVSVSVSVSVS                                -->
 
       <div class="col-2 d-flex align-items-center">
@@ -227,21 +223,12 @@ export default {
               Attacca
             </button>
             <div class="d-flex justify-content-center align-items-center gap-3">
-              <div class="dice border-success">{{dice_player}}</div>
-              <div class="dice border-danger">{{dice_cpu}}</div>
+              <div class="dice border-success">{{ dice_player }}</div>
+              <div class="dice border-danger">{{ dice_cpu }}</div>
             </div>
           </div>
         </div>
       </div>
-
-
-
-
-
-
-
-
-
 
       <!-- Card Cpu -->
       <div class="col-5">
@@ -299,10 +286,80 @@ export default {
 
   <!-- Fine Gico  -->
   <div v-if="game_over" class="fine_gioco">
-    <div class="card" :class="player_win ? 'bg-success' : 'bg-danger'">
-      <div v-if="player_win">hai vinti !!</div>
-      <div v-else>
-        <div class="row"></div>
+    <div class="card-end-game" :class="player_win ? 'bg-success' : 'bg-danger'">
+      <div class="end-game-title">
+        <div v-if="player_win">Hai vinto!!</div>
+        <div v-else>Hai Perso!!</div>
+      </div>
+
+      <div class="end-game-content">
+        <div class="player-card" :class="player_win ? 'scaled-card' : ''">
+          <div class="d-flex justify-content-center my-3">
+            <div class="end-game-image">
+              <img :src="character.type.image" :alt="character.name" />
+            </div>
+          </div>
+          <h5 class="text-center mb-4">{{ character.name }}</h5>
+
+          <div class="table-container w-75 m-auto text-center">
+            <table class="table table-sm">
+              <thead>
+                <th scope="col">Danni Inflitti</th>
+                <th scope="col">Danni subiti</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{ cpu_damage_show }}</td>
+                  <td>{{ player_damage_show }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="d-flex justify-content-center my-3" v-if="player_win">
+            <div class="champ-image">
+              <img src="../assets/images/coppa.jpeg" alt="" />
+            </div>
+          </div>
+        </div>
+
+        <div class="cpu-card" :class="cpu_win ? 'scaled-card' : ''">
+          <div class="d-flex justify-content-center my-3">
+            <div class="end-game-image">
+              <img :src="fullImagePath" :alt="randomCharacter.name" />
+            </div>
+          </div>
+          <h5 class="text-center mb-4">{{ randomCharacter.name }}</h5>
+
+          <div class="table-container w-75 m-auto text-center">
+            <table class="table">
+              <thead>
+                <th scope="col">Danni Inflitti</th>
+                <th scope="col">Danni subiti</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{ player_damage_show }}</td>
+                  <td>{{ cpu_damage_show }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="d-flex justify-content-center my-3" v-if="cpu_win">
+            <div class="champ-image">
+              <img src="../assets/images/coppa.jpeg" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <router-link
+          :to="{ name: 'characters.index' }"
+          class="btn btn-primary play-button replay-button"
+          >Rigioca</router-link
+        >
       </div>
     </div>
   </div>
@@ -315,20 +372,21 @@ export default {
   .center-area {
     width: 65%;
     font-size: 5rem;
-    .dice{
+    .dice {
       border: 2px solid;
       border-radius: 20px;
       min-width: 100px;
       height: 100px;
       display: flex;
       justify-content: center;
-      align-items: center;box-shadow: 1px 2px 13px 0px #9a4d4d;
+      align-items: center;
+      box-shadow: 1px 2px 13px 0px #9a4d4d;
     }
   }
   .card {
     width: 440px;
     height: 666px;
-    box-shadow: 1px 2px 13px 0px #FFFFFF;
+    box-shadow: 1px 2px 13px 0px #ffffff;
   }
   img {
     height: 150px;
@@ -354,10 +412,7 @@ export default {
       height: 320px;
       width: 580px;
       background-color: rgba(51, 85, 45, 0.75);
-      
     }
-    
   }
-  
 }
 </style>
