@@ -21,7 +21,7 @@ export default {
       total_cpu_damege: 0,
 
       /* fine gioco */
-      game_over: true,
+      game_over: false,
       cpu_win: false,
       player_win: false,
 
@@ -92,6 +92,10 @@ export default {
           let player_damege = this.character.strength + this.dice_player;
           this.total_player_damege =
             player_damege - this.randomCharacter.defence;
+
+          if (this.total_player_damege <= 0) {
+            this.total_player_damege = Math.floor(Math.random() * 6);
+          }
         } else {
           this.total_player_damege =
             this.selectedWeapon.damege +
@@ -107,9 +111,9 @@ export default {
           return;
         }
 
-        setTimeout(() => {
-          this.cpuAttack();
-        }, 1000); // Dopo 1 secondo, il CPU attacca
+        this.cpuAttack();
+        // setTimeout(() => {
+        // }, 1000);
       }
     },
 
@@ -123,6 +127,10 @@ export default {
           let cpu_damege = this.randomCharacter.strength + this.dice_cpu;
 
           this.total_cpu_damege = cpu_damege - this.character.defence;
+
+          if (this.total_cpu_damege <= 0) {
+            this.total_cpu_damege = Math.floor(Math.random() * 6);
+          }
         } else {
           this.total_cpu_damege =
             this.srandomCPUWeapon.damege +
@@ -408,10 +416,73 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    .card {
-      height: 320px;
-      width: 580px;
-      background-color: rgba(51, 85, 45, 0.75);
+    .card-end-game {
+      position: relative;
+      min-height: 650px;
+      width: 1000px;
+      border-radius: 20px;
+      padding-bottom: 2rem;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+
+      .end-game-title {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: bold;
+      }
+
+      .player-card,
+      .cpu-card {
+        width: 300px;
+        min-height: 300px;
+        background-color: rgb(33, 37, 41);
+        border-radius: 20px;
+      }
+
+      .scaled-card {
+        transform: scale(1.2);
+      }
+      .end-game-content {
+        display: flex;
+        gap: 100px;
+        background-color: inherit;
+      }
+
+      .end-game-image {
+        width: 100px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 1px solid red;
+
+        img {
+          width: 100%;
+          object-fit: cover;
+          object-position: top;
+        }
+      }
+
+      .champ-image {
+        width: 100px;
+        aspect-ratio: 1;
+        overflow: hidden;
+        border-radius: 50%;
+
+        img {
+          width: 100%;
+          object-fit: cover;
+          object-position: top;
+        }
+      }
+
+      .replay-button {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%);
+      }
     }
   }
 }
