@@ -5,7 +5,6 @@ export default {
   data() {
     return {
       character: null,
-      selectedWeapon: null,
     };
   },
   props: {},
@@ -81,33 +80,39 @@ export default {
 
         <!-- selezione arma -->
         <div class="fs-4">
-          <strong class="me-3"
-            >Seleziona l'arma con cui combattere per poter confermare:</strong
-          >
-          <select
-            v-model="selectedWeapon"
-            class="form-select mt-3"
-            aria-label="Default select example"
-            required
-          >
-            <option v-for="item in character.items" :value="item.id">
-              {{ item.name }}
-            </option>
-          </select>
-        </div>
+          <strong class="me-3">Armi disponibili:</strong>
+          <table class="table fs-6">
+            <thead>
+              <tr>
+                <th scope="col">Arma</th>
+                <th scope="col">Danni</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in character.items">
+                <td>{{ item.name }}</td>
+                <td>{{ item.damege }}</td>
+              </tr>
+            </tbody>
+          </table>
 
-        <div class="button-container mt-4">
-          <router-link
-            :to="{ name: 'characters.index' }"
-            class="btn btn-warning me-3"
-            >Torna alla selezione</router-link
-          >
-         
-          <router-link v-if="selectedWeapon != null" 
-             :to="{ name: 'characters.show', params: { id: character.id, weaponId: selectedWeapon } }"
-             class="btn btn-success ms-3">
-             Salva
-          </router-link>
+          <div class="button-container mt-4">
+            <router-link
+              :to="{ name: 'characters.index' }"
+              class="btn btn-warning me-3"
+              >Torna alla selezione</router-link
+            >
+
+            <router-link
+              :to="{
+                name: 'characters.show',
+                params: { id: character.id, weaponId: selectedWeapon },
+              }"
+              class="btn btn-success"
+            >
+              Continua
+            </router-link>
+          </div>
         </div>
       </div>
     </div>
