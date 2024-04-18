@@ -21,11 +21,9 @@ export default {
       total_cpu_damege: 0,
 
       /* fine gioco */
-      game_over : true,
-      cpu_win:false,
-      player_win:false,
-      
-
+      game_over: true,
+      cpu_win: false,
+      player_win: false,
     };
   },
   computed: {
@@ -114,8 +112,6 @@ export default {
 
     cpuAttack() {
       if (this.randomCPUWeapon && this.character) {
-       
-
         if (this.randomCPUWeapon.dice_num) {
           let cpu_damege =
             this.randomCharacter.strength +
@@ -200,7 +196,8 @@ export default {
                   <div>HP: {{ character.life }}</div>
                   <div>Danni Subiti: {{ player_damage_show }}</div>
                   <div>
-                    rimasti: {{ playerHealth ? playerHealth : character.life }}
+                    HP rimasti:
+                    {{ playerHealth ? playerHealth : character.life }}
                   </div>
                 </div>
               </div>
@@ -262,7 +259,8 @@ export default {
                   <div>HP: {{ randomCharacter.life }}</div>
                   <div>Danni Subiti: {{ cpu_damage_show }}</div>
                   <div>
-                    rimasti: {{ cpuHealth ? cpuHealth : randomCharacter.life }}
+                    HP rimasti:
+                    {{ cpuHealth ? cpuHealth : randomCharacter.life }}
                   </div>
                 </div>
               </div>
@@ -281,29 +279,16 @@ export default {
     <h2>Loading...</h2>
   </div>
 
-
-
-
-   <!-- Fine Gico  -->
-   <div v-if='game_over' class="fine_gioco">
-      <div class="card" :class="player_win ? 'bg-success' : 'bg-danger' " >
-
-        <div v-if="player_win">
-          hai vinti !!
-        </div>
-        <div v-else>
-          <div class="row"></div>
-        </div>
-
-
+  <!-- Fine Gico  -->
+  <div v-if="game_over" class="fine_gioco">
+    <div class="card" :class="player_win ? 'bg-success' : 'bg-danger'">
+      <div v-if="player_win">hai vinti !!</div>
+      <div v-else>
+        <div class="row"></div>
       </div>
     </div>
+  </div>
 </template>
-
-
-
-
-
 
 <style lang="scss" scoped>
 .container {
@@ -326,7 +311,7 @@ export default {
   .card-header {
     color: rgb(106, 106, 56);
   }
-  .fine_gioco{
+  .fine_gioco {
     width: 100vw;
     height: 100vh;
     background-color: rgb(33, 37, 41);
@@ -337,14 +322,11 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    .card{
+    .card {
       height: 320px;
       width: 580px;
       background-color: rgba(51, 85, 45, 0.75);
     }
-  
   }
 }
 </style>
-
-
