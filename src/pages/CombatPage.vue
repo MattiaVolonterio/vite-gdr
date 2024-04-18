@@ -223,13 +223,15 @@ export default {
         <div class="center-area">
           <div>VS</div>
           <!-- btn logica -->
-          <div>
+          <div class="pe-3">
             <button class="btn btn-primary ms-3" @click="initializeHealth">
               inizia
             </button>
             <button class="btn btn-warning ms-3" @click="playerAttack">
               Attacca
             </button>
+          </div>
+          <div>
             <div class="d-flex justify-content-center align-items-center gap-3">
               <div class="dice border-success">{{ dice_player }}</div>
               <div class="dice border-danger">{{ dice_cpu }}</div>
@@ -260,7 +262,6 @@ export default {
               <div class="row mt-3">
                 <div class="col-4 mt-3 me-5">
                   <h5>Stat PG</h5>
-                  randomCharacter
                   <div>HP: {{ randomCharacter.life }}</div>
                   <div>Forza: {{ randomCharacter.strength }}</div>
                   <div>Difesa: {{ randomCharacter.defence }}</div>

@@ -5,20 +5,30 @@ export default {
     return {};
   },
   props: { character: Object },
-  methods: {},
+  methods: {
+    fullImagePath() {
+      return api.baseUrl2 + this.character.type.image;
+    },
+  },
 };
 </script>
 
 <template>
   <div class="col">
     <div class="card h-100">
-      <div class="card-body">
-        <h5 class="card-title">
-          <strong class="h5">{{ character.name }}</strong>
-        </h5>
-        <p class="card-title">
-          <strong>{{ character.type.name }}</strong>
-        </p>
+      <div class="card-body card-top-container">
+        <div class="card-title-container">
+          <h5 class="card-title">
+            <strong class="h5">{{ character.name }}</strong>
+          </h5>
+          <p class="card-title">
+            <strong>{{ character.type.name }}</strong>
+          </p>
+        </div>
+
+        <div class="card-title-image">
+          <img :src="fullImagePath()" :alt="character.name" />
+        </div>
         <!-- <p class="card-text">
           {{ character.description }}
         </p> -->
@@ -52,4 +62,21 @@ export default {
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.card-top-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card-title-image {
+  width: 100px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid red;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+  }
+}
+</style>
