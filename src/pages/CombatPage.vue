@@ -268,6 +268,14 @@ export default {
   >
     <h2>Loading...</h2>
   </div>
+   <!-- Fine Gico  -->
+   <div class="fine_gioco">
+    <div class="card ">
+
+      
+
+
+    </div>
 </template>
 
 <style lang="scss" scoped>
@@ -291,5 +299,25 @@ export default {
   .card-header {
     color: rgb(106, 106, 56);
   }
+  .fine_gioco{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(33, 37, 41);
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .card{
+      height: 320px;
+      width: 580px;
+      background-color: rgba(51, 85, 45, 0.75);
+    }
+  
+  }
 }
 </style>
+
+
