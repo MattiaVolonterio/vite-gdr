@@ -20,6 +20,8 @@ export default {
       total_player_damege: 0,
       total_cpu_damege: 0,
 
+      is_game_start: false,
+
       /* fine gioco */
       game_over: false,
       cpu_win: false,
@@ -79,12 +81,13 @@ export default {
       if (this.character && this.randomCharacter) {
         this.playerHealth = this.character.life;
         this.cpuHealth = this.randomCharacter.life;
+        this.is_game_start = true;
       }
     },
 
     //metodi per att
     playerAttack() {
-      if (this.randomCPUWeapon && this.randomCharacter) {
+      if (this.randomCPUWeapon && this.randomCharacter && this.is_game_start) {
         if (this.selectedWeapon.dice_num) {
           this.dice_player = Math.floor(
             Math.random() * parseInt(this.selectedWeapon.dice_faces) + 1
@@ -224,10 +227,18 @@ export default {
           <div>VS</div>
           <!-- btn logica -->
           <div class="pe-3">
-            <button class="btn btn-primary ms-3" @click="initializeHealth">
+            <button
+              v-if="!is_game_start"
+              class="btn btn-primary ms-3"
+              @click="initializeHealth"
+            >
               inizia
             </button>
-            <button class="btn btn-warning ms-3" @click="playerAttack">
+            <button
+              v-if="is_game_start"
+              class="btn btn-warning ms-3"
+              @click="playerAttack"
+            >
               Attacca
             </button>
           </div>
