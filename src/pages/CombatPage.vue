@@ -281,10 +281,80 @@ export default {
 
   <!-- Fine Gico  -->
   <div v-if="game_over" class="fine_gioco">
-    <div class="card" :class="player_win ? 'bg-success' : 'bg-danger'">
-      <div v-if="player_win">hai vinti !!</div>
-      <div v-else>
-        <div class="row"></div>
+    <div class="card-end-game" :class="player_win ? 'bg-success' : 'bg-danger'">
+      <div class="end-game-title">
+        <div v-if="player_win">Hai vinto!!</div>
+        <div v-else>Hai Perso!!</div>
+      </div>
+
+      <div class="end-game-content">
+        <div class="player-card" :class="player_win ? 'scaled-card' : ''">
+          <div class="d-flex justify-content-center my-3">
+            <div class="end-game-image">
+              <img :src="character.type.image" :alt="character.name" />
+            </div>
+          </div>
+          <h5 class="text-center mb-4">{{ character.name }}</h5>
+
+          <div class="table-container w-75 m-auto text-center">
+            <table class="table table-sm">
+              <thead>
+                <th scope="col">Danni Inflitti</th>
+                <th scope="col">Danni subiti</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{ cpu_damage_show }}</td>
+                  <td>{{ player_damage_show }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="d-flex justify-content-center my-3" v-if="player_win">
+            <div class="champ-image">
+              <img src="../assets/images/coppa.jpeg" alt="" />
+            </div>
+          </div>
+        </div>
+
+        <div class="cpu-card" :class="cpu_win ? 'scaled-card' : ''">
+          <div class="d-flex justify-content-center my-3">
+            <div class="end-game-image">
+              <img :src="fullImagePath" :alt="randomCharacter.name" />
+            </div>
+          </div>
+          <h5 class="text-center mb-4">{{ randomCharacter.name }}</h5>
+
+          <div class="table-container w-75 m-auto text-center">
+            <table class="table">
+              <thead>
+                <th scope="col">Danni Inflitti</th>
+                <th scope="col">Danni subiti</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{ player_damage_show }}</td>
+                  <td>{{ cpu_damage_show }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="d-flex justify-content-center my-3" v-if="cpu_win">
+            <div class="champ-image">
+              <img src="../assets/images/coppa.jpeg" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <router-link
+          :to="{ name: 'characters.index' }"
+          class="btn btn-primary play-button replay-button"
+          >Rigioca</router-link
+        >
       </div>
     </div>
   </div>
@@ -322,10 +392,73 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    .card {
-      height: 320px;
-      width: 580px;
-      background-color: rgba(51, 85, 45, 0.75);
+    .card-end-game {
+      position: relative;
+      min-height: 650px;
+      width: 1000px;
+      border-radius: 20px;
+      padding-bottom: 2rem;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+
+      .end-game-title {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: bold;
+      }
+
+      .player-card,
+      .cpu-card {
+        width: 300px;
+        min-height: 300px;
+        background-color: rgb(33, 37, 41);
+        border-radius: 20px;
+      }
+
+      .scaled-card {
+        transform: scale(1.2);
+      }
+      .end-game-content {
+        display: flex;
+        gap: 100px;
+        background-color: inherit;
+      }
+
+      .end-game-image {
+        width: 100px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 1px solid red;
+
+        img {
+          width: 100%;
+          object-fit: cover;
+          object-position: top;
+        }
+      }
+
+      .champ-image {
+        width: 100px;
+        aspect-ratio: 1;
+        overflow: hidden;
+        border-radius: 50%;
+
+        img {
+          width: 100%;
+          object-fit: cover;
+          object-position: top;
+        }
+      }
+
+      .replay-button {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%);
+      }
     }
   }
 }
