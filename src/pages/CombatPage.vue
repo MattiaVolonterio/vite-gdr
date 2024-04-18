@@ -19,6 +19,13 @@ export default {
 
       total_player_damege: 0,
       total_cpu_damege: 0,
+
+      /* fine gioco */
+      game_over : true,
+      cpu_win:false,
+      player_win:false,
+      
+
     };
   },
   computed: {
@@ -94,7 +101,8 @@ export default {
         this.cpu_damage_show += this.total_player_damege;
 
         if (this.cpuHealth <= 0) {
-          alert("Hai vinto!");
+          this.game_over = true;
+          this.player_win = true;
           return;
         }
 
@@ -106,9 +114,7 @@ export default {
 
     cpuAttack() {
       if (this.randomCPUWeapon && this.character) {
-        if (this.playerHealth <= 0) {
-          alert("Hai perso!");
-        }
+       
 
         if (this.randomCPUWeapon.dice_num) {
           let cpu_damege =
@@ -126,6 +132,12 @@ export default {
         }
         this.playerHealth -= this.total_cpu_damege;
         this.player_damage_show += this.total_cpu_damege;
+
+        if (this.playerHealth <= 0) {
+          this.game_over = true;
+          this.cpu_win = true;
+          return;
+        }
       }
     },
   },
@@ -268,15 +280,30 @@ export default {
   >
     <h2>Loading...</h2>
   </div>
+
+
+
+
    <!-- Fine Gico  -->
-   <div class="fine_gioco">
-    <div class="card ">
+   <div v-if='game_over' class="fine_gioco">
+      <div class="card" :class="player_win ? 'bg-success' : 'bg-danger' " >
 
-      
+        <div v-if="player_win">
+          hai vinti !!
+        </div>
+        <div v-else>
+          <div class="row"></div>
+        </div>
 
 
+      </div>
     </div>
 </template>
+
+
+
+
+
 
 <style lang="scss" scoped>
 .container {
